@@ -1,0 +1,81 @@
+
+name: Publish NuGet package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore solution
+        run: dotnet restore JavaScriptEventRegistrationAuditor.sln
+
+      - name: Build Release
+        run: dotnet build JavaScriptEventRegistrationAuditor.sln -c Release --no-restore
+
+      - name: Run tests
+        run: dotnet test JavaScriptEventRegistrationAuditor.sln -c Release --no-build
+
+      - name: Setup NuGet CLI
+        uses: NuGet/setup-nuget@v2
+
+      - name: Stage plugin and create NuGet package
+        shell: pwsh
+        run: ./build/Package-Plugin.ps1
+
+      - name: Verify package
+        shell: pwsh
+        run: |
+          $packages = @(Get-ChildItem "./artifacts/*.nupkg" |
+            Where-Object { $_.Name -notlike "*.symbols.nupkg" })
+
+          if ($packages.Count -ne 1) {
+            throw "Expected exactly one NuGet package; found $($packages.Count)."
+          }
+
+          Write-Host "Package ready: $($packages[0].Name)"
+
+      - name: Authenticate with NuGet Trusted Publishing
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: glowofsky
+
+      - name: Publish to NuGet.org
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) {
+            throw "NuGet Trusted Publishing did not return a publishing credential."
+          }
+
+          $packages = @(Get-ChildItem "./artifacts/*.nupkg" |
+            Where-Object { $_.Name -notlike "*.symbols.nupkg" })
+
+          foreach ($package in $packages) {
+            dotnet nuget push $package.FullName `
+              --api-key $env:NUGET_API_KEY `
+              --source "https://api.nuget.org/v3/index.json" `
+              --skip-duplicate
+
+            if ($LASTEXITCODE -ne 0) {
+              throw "Publishing failed for $($package.Name)."
+            }
+          }
