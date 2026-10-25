@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- XrmToolBox plugins target .NET Framework 4.8 -->
+		<TargetFramework>net48</TargetFramework>
+
+		<AssemblyName>JavaScriptEventRegistrationAuditor</AssemblyName>
+		<RootNamespace>JavaScriptEventRegistrationAuditor</RootNamespace>
+		<OutputType>Library</OutputType>
+
+		<LangVersion>latest</LangVersion>
+		<Nullable>disable</Nullable>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<Copyright>Copyright © Gagan Deep Singh</Copyright>
+		<Authors>Gagan Deep Singh</Authors>
+		<Company>Gagan Deep Singh</Company>
+		<Product>JavaScript Event Registration Auditor</Product>
+		<Description>XrmToolBox plugin that audits JavaScript form event registrations in Microsoft Dataverse and exports an Excel report.</Description>
+
+		<Version>1.2026.10.1</Version>
+		<AssemblyVersion>1.2026.10.1</AssemblyVersion>
+		<FileVersion>1.2026.10.1</FileVersion>
+
+		<ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="System.ComponentModel.Composition" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Windows.Forms" />
+		<Reference Include="System.ServiceModel" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- XrmToolBox plugin development references -->
+		<PackageReference Include="XrmToolBoxPackage"
+						  Version="1.2025.10.74"
+						  ExcludeAssets="runtime" />
+
+		<!-- Fix McTools.Xrm.Connection assembly version conflict -->
+		<PackageReference Include="MscrmTools.Xrm.Connection"
+						  Version="1.2025.9.64" />
+
+		<!-- Excel workbook generation -->
+		<PackageReference Include="ClosedXML"
+						  Version="0.102.3" />
+
+		<!-- JSON processing -->
+		<PackageReference Include="Newtonsoft.Json"
+						  Version="13.0.3"
+						  ExcludeAssets="runtime" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\icon.ico" />
+	</ItemGroup>
+
+</Project>

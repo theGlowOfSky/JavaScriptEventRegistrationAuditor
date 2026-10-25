@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>JavaScriptEventRegistrationAuditor</id>
+    <version>1.2026.10.1</version>
+    <title>JavaScript Event Registration Auditor</title>
+    <authors>Gagan Deep Singh</authors>
+    <owners>Gagan Deep Singh</owners>
+    <copyright>Copyright © Gagan Deep Singh</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+    <description>
+      XrmToolBox plugin that audits JavaScript form event registrations
+      in Microsoft Dataverse and exports an Excel report.
+      Developed by Gagan Deep Singh - https://www.linkedin.com/in/glowofsky/
+    </description>
+
+    <tags>XrmToolBox Dataverse Dynamics365 JavaScript Audit</tags>
+
+    <!-- GitHub repository -->
+    <projectUrl>https://github.com/theGlowOfSky/JavaScriptEventRegistrationAuditor</projectUrl>
+
+    <!-- Public icon URL -->
+    <iconUrl>https://raw.githubusercontent.com/theGlowOfSky/JavaScriptEventRegistrationAuditor/main/assets/icon-256.png</iconUrl>
+
+    <!-- Icon included inside the NuGet package -->
+    <icon>icon-256.png</icon>
+
+    <!-- README shown with the package -->
+    <readme>README.md</readme>
+  </metadata>
+
+  <files>
+    <!-- Plugin DLL and required dependencies -->
+    <file src="Plugins\**" target="lib\net48\Plugins" />
+
+    <!-- Include icon at package root -->
+    <file src="..\..\assets\icon-256.png" target="" />
+
+    <!-- README at package root -->
+    <file src="..\..\README.md" target="" />
+  </files>
+</package>

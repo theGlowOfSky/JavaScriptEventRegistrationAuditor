@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+packages/
+artifacts/
+*.nupkg
+TestResults/
+*.xlsx
+*_Snapshot*.json
+*.bak
+*.log
+
+build/nuget.exe
