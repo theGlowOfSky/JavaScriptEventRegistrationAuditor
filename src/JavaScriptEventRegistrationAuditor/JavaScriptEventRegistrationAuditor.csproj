@@ -18,9 +18,9 @@
 		<Product>JavaScript Event Registration Auditor</Product>
 		<Description>XrmToolBox plugin that audits JavaScript form event registrations in Microsoft Dataverse and exports an Excel report.</Description>
 
-		<Version>1.2026.10.2</Version>
-		<AssemblyVersion>1.2026.10.2</AssemblyVersion>
-		<FileVersion>1.2026.10.2</FileVersion>
+		<Version>1.2026.10.3</Version>
+		<AssemblyVersion>1.2026.10.3</AssemblyVersion>
+		<FileVersion>1.2026.10.3</FileVersion>
 
 		<ApplicationIcon>Resources\icon.ico</ApplicationIcon>
 	</PropertyGroup>

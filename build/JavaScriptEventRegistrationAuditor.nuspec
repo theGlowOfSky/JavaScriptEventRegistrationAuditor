@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>JavaScriptEventRegistrationAuditor</id>
-    <version>1.2026.10.2</version>
+    <version>1.2026.10.3</version>
     <title>JavaScript Event Registration Auditor</title>
     <authors>Gagan Deep Singh</authors>
     <owners>Gagan Deep Singh</owners>
@@ -26,6 +26,9 @@
 
     <!-- README shown with the package -->
     <readme>README.md</readme>
+    <dependencies>
+      <dependency id="XrmToolBox" version="1.2025.10.74" />
+    </dependencies>
   </metadata>
 
   <files>
